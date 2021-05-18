@@ -1,0 +1,61 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: udeshyagiri/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: udeshyagiri/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: udeshyagiri/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+    - image: udeshyagiri/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+    - image: udeshyagiri/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+    - image: udeshyagiri/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+# NOTE: To create a Secret in the Kubernetes cluster
+# kubectl create secret generic jwt-secret --from-literal JWT_KEY=secret
+# kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=sk_test_51IqyoPSE3Kzn70yb2Jb9H7gtpTdNusSVQsKG93N2QWz3SYn2NX45cgTWmQSKSVkeSHqVFuFAH3bDAwy8mGP5bs2p00DIIHNtWj
