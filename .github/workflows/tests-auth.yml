@@ -1,10 +1,9 @@
-name: tests
+name: tests-auth
 
-on: 
-  pull_request
-  
+on: pull_request
+
 jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

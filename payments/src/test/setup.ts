@@ -12,6 +12,9 @@ declare global {
 
 jest.mock('../nats-wrapper');
 
+process.env.STRIPE_KEY =
+  'sk_test_51IqyoPSE3Kzn70yb2Jb9H7gtpTdNusSVQsKG93N2QWz3SYn2NX45cgTWmQSKSVkeSHqVFuFAH3bDAwy8mGP5bs2p00DIIHNtWj';
+
 let mongo: any;
 
 // Hook Function: is called before all tests executed
